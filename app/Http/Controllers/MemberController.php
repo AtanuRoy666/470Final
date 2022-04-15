@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Department;
+use App\Models\Member;
 
 class MemberController extends Controller
 {
@@ -13,7 +15,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $data=Member::orderBy('id', 'asc')->get();
+        return view('member.index', ['data'=>$data]);
     }
 
     /**
@@ -23,7 +26,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        $data=Department::orderBy('id', 'asc')->get();
+        return view('member.create', ['departments'=>$data]);
     }
 
     /**
@@ -34,8 +38,25 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'full_name'=>'required',
+            'address'=>'required',
+            'mobile'=>'required',
+            'email'=>'required',
+            'payment_status'=>'required'
+        ]);
+
+        $data=new Member();
+        $data->full_name=$request->full_name;
+        $data->address=$request->address;
+        $data->mobile=$request->mobile;
+        $data->email=$request->email;
+        $data->payment_status=$request->payment_status;
+        $data->save();
+
+        return redirect('member/create')->with('msg', 'Member added');
     }
+    
 
     /**
      * Display the specified resource.

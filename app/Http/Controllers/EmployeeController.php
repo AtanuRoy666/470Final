@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Department;
+use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
@@ -13,7 +15,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $data=Employee::orderBy('id', 'asc')->get();
+        return view('employee.index', ['data'=>$data]);
     }
 
     /**
@@ -23,7 +26,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $data=Department::orderBy('id', 'asc')->get();
+        return view('employee.create', ['departments'=>$data]);
     }
 
     /**
@@ -34,7 +38,30 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'full_name'=>'required',
+            'address'=>'required',
+            'mobile'=>'required',
+            'email'=>'required',
+            'status'=>'required'
+        ]);
+        
+        // $photo=$request->file('photo');
+        // $renamePhoto=time().$photo->getClientOriginalExtension();
+        // $dest=public_path('/images');
+        // $photo->move($dest, $renamePhoto);
+
+        $data=new Employee();
+        $data->department_id=$request->depart;
+        $data->full_name=$request->full_name;
+        // $data->photo=$renamePhoto;
+        $data->address=$request->address;
+        $data->mobile=$request->mobile;
+        $data->email=$request->email;
+        $data->status=$request->status;
+        $data->save();
+
+        return redirect('employee/create')->with('msg', 'Employee added');
     }
 
     /**
