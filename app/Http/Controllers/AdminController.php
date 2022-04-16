@@ -4,12 +4,38 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Employee;
+use App\Models\Member;
+use Carbon\carbon;
 
 class AdminController extends Controller
 {
     //Dashboard
     public function index(){
-        return view('index');
+        $data1=Employee::select('id', 'created_at')->get()->groupBy(function($data1){
+            return Carbon::parse($data1->created_at)->format('M');
+        });
+        $data2=Member::select('id', 'created_at')->get()->groupBy(function($data2){
+            return Carbon::parse($data2->created_at)->format('M');
+        });
+
+        $months1=[];
+        $monthCount1=[];
+
+        $months2=[];
+        $monthCount2=[];
+
+        foreach($data1 as $month =>$values){
+            $months1[]=$month;
+            $monthCount1[]=count($values);
+        }
+        foreach($data2 as $month =>$values){
+            $months2[]=$month;
+            $monthCount2[]=count($values);
+        }
+
+        return view('index',['data1'=>$data1,'months1'=>$months1, 'monthCount1'=>$monthCount1], 
+        [ 'data2'=>$data2, 'months2'=>$months2, 'monthCount2'=>$monthCount2]);
     }
 
     //login

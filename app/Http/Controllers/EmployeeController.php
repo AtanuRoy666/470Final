@@ -72,7 +72,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $data=Employee::find($id);
+        return view('employee.show',['data'=>$data]);
     }
 
     /**
@@ -83,7 +84,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $departs=Department::orderBy('id', 'asc')->get();
+        $data=Employee::find($id);
+        return view('employee.edit', ['departs'=>$departs, 'data'=>$data]);
     }
 
     /**
@@ -95,7 +98,30 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'full_name'=>'required',
+            'address'=>'required',
+            'mobile'=>'required',
+            'email'=>'required',
+            'status'=>'required'
+        ]);
+        
+        // $photo=$request->file('photo');
+        // $renamePhoto=time().$photo->getClientOriginalExtension();
+        // $dest=public_path('/images');
+        // $photo->move($dest, $renamePhoto);
+
+        $data=Employee::find($id);
+        $data->department_id=$request->depart;
+        $data->full_name=$request->full_name;
+        // $data->photo=$renamePhoto;
+        $data->address=$request->address;
+        $data->mobile=$request->mobile;
+        $data->email=$request->email;
+        $data->status=$request->status;
+        $data->save();
+
+        return redirect('employee/'.$id.'/edit')->with('msg', 'Employee updated');
     }
 
     /**
@@ -106,6 +132,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Employee::where('id', $id)->delete();
+        return redirect('employee');
     }
 }

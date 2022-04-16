@@ -66,7 +66,8 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        $data=Member::find($id);
+        return view('member.show',['data'=>$data]);
     }
 
     /**
@@ -77,7 +78,9 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+       
+        $data=Member::find($id);
+        return view('member.edit', ['data'=>$data]);
     }
 
     /**
@@ -89,7 +92,22 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'full_name'=>'required',
+            'address'=>'required',
+            'mobile'=>'required',
+            'email'=>'required',
+            'payment_status'=>'required'
+        ]);
+
+        $data=Member::find($id);
+        $data->full_name=$request->full_name;
+        $data->address=$request->address;
+        $data->mobile=$request->mobile;
+        $data->email=$request->email;
+        $data->payment_status=$request->payment_status;
+        $data->save();
+        return redirect('member/'.$id.'/edit')->with('msg', 'Member updated');
     }
 
     /**
@@ -100,6 +118,7 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Member::where('id', $id)->delete();
+        return redirect('member');
     }
 }
