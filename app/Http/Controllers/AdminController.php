@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Employee;
 use App\Models\Member;
 use Carbon\carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -41,7 +42,12 @@ class AdminController extends Controller
 
     //login
     public function login(){
-        return view('login');
+        if(Auth::check()){
+            return view('welcome');
+        }
+        else{
+            return view('login');
+        }
     }
 
     //Submit login
@@ -67,7 +73,5 @@ class AdminController extends Controller
     }
 
     //auth
-    public function __construct(){
-        $this->middleware('auth');
-    }
+
 }
