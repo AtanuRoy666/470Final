@@ -8,11 +8,16 @@ use App\Models\Employee;
 use App\Models\Member;
 use Carbon\carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
     //Dashboard
     public function index(Request $r){
+
+        if(!$r->session()->get("adminLogin")){
+            return redirect()->to(route('admin_login'));
+        }
         
         $data1=Employee::select('id', 'created_at')->get()->groupBy(function($data1){
             return Carbon::parse($data1->created_at)->format('M');
@@ -41,9 +46,11 @@ class AdminController extends Controller
     }
 
     //login
-    public function login(){
-        if(Auth::check()){
-            return view('welcome');
+    public function login(Request $request){
+
+        if($request->session()->get("adminLogin")){
+            
+            return redirect()->to(route('dashboard'));
         }
         else{
             return view('login');
@@ -58,7 +65,7 @@ class AdminController extends Controller
         ]);
         $checkAdmin=Admin::where(['username'=>$request->username, 'password'=>$request->password])->count();
         if($checkAdmin>0){
-            session(['adminLogin', true]);
+            Session::put('adminLogin', true);
             // $request->session()->put('username', $session[0]->username);
             return redirect('admin');
         }else{
@@ -68,7 +75,7 @@ class AdminController extends Controller
 
     //logout
     public function logout(){
-        session()->forget('adminLogout');
+        Session::flush();
         return redirect('admin/login');
     }
 

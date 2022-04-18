@@ -21,13 +21,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/login', [AdminController::class,'login']);
+Route::get('admin/login', [AdminController::class,'login'])->name('admin_login');
 
-Route::get('admin', [AdminController::class,'index']);
+Route::get('admin', [AdminController::class,'index'])->name('dashboard');
 
 Route::post('admin/login', [AdminController::class,'submit_login']);
 
-Route::get('admin/logout', [AdminController::class,'logout']);
+Route::get('admin/logout', [AdminController::class,'logout'])->name('user_logout');
 
 //Department Resources
 Route::get('depart/{id}/delete', [DepartmentController::class, 'destroy']);
