@@ -21,9 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/login', [AdminController::class,'login']);
+Route::get('admin/login', [AdminController::class,'login'])->name('login');
 
-Route::get('admin', [AdminController::class,'index']);
+Route::get('admin', [AdminController::class,'index'])->middleware('checkuser');
 
 Route::post('admin/login', [AdminController::class,'submit_login']);
 

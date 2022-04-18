@@ -11,7 +11,8 @@ use Carbon\carbon;
 class AdminController extends Controller
 {
     //Dashboard
-    public function index(){
+    public function index(Request $r){
+        
         $data1=Employee::select('id', 'created_at')->get()->groupBy(function($data1){
             return Carbon::parse($data1->created_at)->format('M');
         });
@@ -52,6 +53,7 @@ class AdminController extends Controller
         $checkAdmin=Admin::where(['username'=>$request->username, 'password'=>$request->password])->count();
         if($checkAdmin>0){
             session(['adminLogin', true]);
+            // $request->session()->put('username', $session[0]->username);
             return redirect('admin');
         }else{
             return redirect('admin/login')->with('msg', 'Invalid Credentials!');
@@ -62,5 +64,10 @@ class AdminController extends Controller
     public function logout(){
         session()->forget('adminLogout');
         return redirect('admin/login');
+    }
+
+    //auth
+    public function __construct(){
+        $this->middleware('auth');
     }
 }
