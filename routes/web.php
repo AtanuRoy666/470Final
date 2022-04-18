@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\memberController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,9 @@ Route::resource('depart', DepartmentController::class);
 //Employee Resources
 Route::get('employee/{id}/delete', [EmployeeController::class, 'destroy']);
 Route::resource('employee', EmployeeController::class);
+
+//Payment Resources
+Route::resource('payment', PaymentController::class);
 
 //Member Resources
 Route::get('member/{id}/delete', [MemberController::class, 'destroy']);

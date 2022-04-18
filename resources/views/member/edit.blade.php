@@ -47,7 +47,7 @@
                         <input type="text" value="{{$data->email}}" name="email" class='form-control'>
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th>Payment Status</th>
                     <td>
                         <select name="payment_status" id="" class='form-control'>
@@ -58,7 +58,7 @@
                             
                         </select>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td colspan='2'>
                         <input type="submit" value='Submit' class='btn btn-primary'>

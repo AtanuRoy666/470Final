@@ -1,10 +1,10 @@
 @extends('layout')
-@section('title', 'Add New Member')
+@section('title', 'Member Details')
 @section('content')
 <div class="card mb-4 mt-5">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
-        Add New Member
+        Member Details
         <a href="{{url('member')}}" class='float-end btn btn-sm btn-success'>View All</a>
     </div>
     <div class="card-body">
@@ -18,46 +18,49 @@
         @if(Session::has('msg'))
         <p class="text-success">{{session('msg')}}</p>
         @endif
-        <form action="{{url('member')}}" method="post" enctype='multipart/form-data'>
+        <form action="{{url('member/'.$data->id)}}" method="post" enctype='multipart/form-data'>
+            @method('put')
             @csrf
+            
             <table class='table table-bordered'>
+                <tr>
+                    <th>Member ID</th>
+                    <td>
+                        {{$data->mem_id}}
+                    </td>
+                </tr>
                 <tr>
                     <th>Full Name</th>
                     <td>
-                        <input type="text" name="full_name" class='form-control'>
+                        {{$data->full_name}}
                     </td>
                 </tr>
                 <tr>
                     <th>Address</th>
                     <td>
-                        <input type="text" name="address" class='form-control'>
+                        {{$data->address}}
                     </td>
                 </tr>
                 <tr>
                     <th>Mobile</th>
                     <td>
-                        <input type="text" name="mobile" class='form-control'>
+                        {{$data->mobile}}
                     </td>
                 </tr>
                 <tr>
                     <th>Email</th>
                     <td>
-                        <input type="text" name="email" class='form-control'>
+                        {{$data->email}}
                     </td>
                 </tr>
-                <!-- <tr>
+                <tr>
                     <th>Payment Status</th>
                     <td>
-                        <input type="radio" name="payment_status" value='1' > Paid 
-                        <br>
-                        <input type="radio" name="payment_status" value='0' > Pending 
+                        {{$data->payment_status}}  
                     </td>
-                </tr> -->
-                <tr>
-                    <td colspan='2'>
-                        <input type="submit" value='Submit' class='btn btn-primary'>
-                    </td>
+                    
                 </tr>
+                
             </table>
         </form>
     </div>

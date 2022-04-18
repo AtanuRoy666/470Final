@@ -65,7 +65,7 @@ class AdminController extends Controller
         ]);
         $checkAdmin=Admin::where(['username'=>$request->username, 'password'=>$request->password])->count();
         if($checkAdmin>0){
-            Session::put('adminLogin', true);
+            Session::put('adminLogin', 'username');
             // $request->session()->put('username', $session[0]->username);
             return redirect('admin');
         }else{

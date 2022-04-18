@@ -14,7 +14,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Gym Management System</a>
+            <a class="navbar-brand ps-3" href="admin">Gym Management System</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search
@@ -90,6 +90,20 @@
                             </div>
                             <!-- End Member -->
 
+                            <!-- Payment -->
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#payMenu" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Payment
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="payMenu" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{url('payment')}}">Payment History</a>
+                                    <a class="nav-link" href="{{url('payment/create')}}">Make Payment</a>
+                                </nav>
+                            </div>
+                            <!-- End Payment -->
+
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -135,7 +149,8 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        admin
+                            {{"admin"}}
+                            
                     </div>
                 </nav>
             </div>
@@ -149,7 +164,6 @@
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; GymManagementSystem || Atanu Roy || 2022</div>
-                
                         </div>
                     </div>
                 </footer>

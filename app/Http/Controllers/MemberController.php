@@ -42,8 +42,8 @@ class MemberController extends Controller
             'full_name'=>'required',
             'address'=>'required',
             'mobile'=>'required',
-            'email'=>'required',
-            'payment_status'=>'required'
+            'email'=>'required'
+            // 'payment_status'=>'required'
         ]);
 
         $data=new Member();
@@ -51,7 +51,7 @@ class MemberController extends Controller
         $data->address=$request->address;
         $data->mobile=$request->mobile;
         $data->email=$request->email;
-        $data->payment_status=$request->payment_status;
+        // $data->payment_status=$request->payment_status;
         $data->save();
 
         return redirect('member/create')->with('msg', 'Member added');
@@ -96,8 +96,8 @@ class MemberController extends Controller
             'full_name'=>'required',
             'address'=>'required',
             'mobile'=>'required',
-            'email'=>'required',
-            'payment_status'=>'required'
+            'email'=>'required'
+            // 'payment_status'=>'required'
         ]);
 
         $data=Member::find($id);
@@ -105,7 +105,7 @@ class MemberController extends Controller
         $data->address=$request->address;
         $data->mobile=$request->mobile;
         $data->email=$request->email;
-        $data->payment_status=$request->payment_status;
+        // $data->payment_status=$request->payment_status;
         $data->save();
         return redirect('member/'.$id.'/edit')->with('msg', 'Member updated');
     }

@@ -26,7 +26,7 @@
                 <tr>
                     <th>Member ID</th>
                     <td>
-                        {{$data->mem_id}}
+                        {{$data->id}}
                     </td>
                 </tr>
                 <tr>
@@ -53,13 +53,7 @@
                         {{$data->email}}
                     </td>
                 </tr>
-                <tr>
-                    <th>Payment Status</th>
-                    <td>
-                        {{$data->payment_status}}  
-                    </td>
-                    
-                </tr>
+                
                 
             </table>
         </form>
