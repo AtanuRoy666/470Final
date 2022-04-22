@@ -6,6 +6,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,9 @@ Route::resource('employee', EmployeeController::class);
 
 //Payment Resources
 Route::resource('payment', PaymentController::class);
+
+//Attendance Resources
+Route::resource('attendance', AttendanceController::class);
 
 //Member Resources
 Route::get('member/{id}/delete', [MemberController::class, 'destroy']);

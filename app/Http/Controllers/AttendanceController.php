@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Department;
-use App\Models\Member;
+use App\Models\Attendance;
 
-class MemberController extends Controller
+class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $data=Member::orderBy('id', 'asc')->get();
-        return view('member.index', ['data'=>$data]);
+        $data=Attendance::orderBy('id', 'desc')->get();
+        return view('attendance.index', ['data'=>$data]);
     }
 
     /**
@@ -26,8 +25,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        $data=Department::orderBy('id', 'asc')->get();
-        return view('member.create', ['departments'=>$data]);
+        $data=Attendance::orderBy('id', 'asc')->get();
+        return view('attendance.create', ['departments'=>$data]);
     }
 
     /**
@@ -39,24 +38,23 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'mem_id'=>'required',
             'full_name'=>'required',
-            'address'=>'required',
-            'mobile'=>'required',
-            'email'=>'required'
-            // 'payment_status'=>'required'
+            'locker'=>'required',
+            'checkIn'=>'required',
+
         ]);
 
-        $data=new Member();
+        $data=new Attendance();
+        $data->mem_id=$request->mem_id;
         $data->full_name=$request->full_name;
-        $data->address=$request->address;
-        $data->mobile=$request->mobile;
-        $data->email=$request->email;
-        // $data->payment_status=$request->payment_status;
+        $data->locker=$request->locker;
+        $data->checkIn=$request->checkIn;
+        $data->checkOut=$request->checkOut;
         $data->save();
 
-        return redirect('member/create')->with('msg', 'Member added');
+        return redirect('attendance/create')->with('msg', 'Attendance stored');
     }
-    
 
     /**
      * Display the specified resource.
@@ -66,8 +64,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $data=Member::find($id);
-        return view('member.show',['data'=>$data]);
+        //
     }
 
     /**
@@ -78,9 +75,8 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-       
-        $data=Member::find($id);
-        return view('member.edit', ['data'=>$data]);
+        $data=Attendance::find($id);
+        return view('attendance.edit', ['data'=>$data]);
     }
 
     /**
@@ -93,19 +89,22 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'mem_id'=>'required',
             'full_name'=>'required',
-            'address'=>'required',
-            'mobile'=>'required',
-            'email'=>'required'
+            'locker'=>'required',
+            'checkIn'=>'required',
+            'checkOut'=>'required'
         ]);
 
-        $data=Member::find($id);
+        $data=Attendance::find($id);
+        $data->mem_id=$request->mem_id;
         $data->full_name=$request->full_name;
-        $data->address=$request->address;
-        $data->mobile=$request->mobile;
-        $data->email=$request->email;
+        $data->locker=$request->locker;
+        $data->checkIn=$request->checkIn;
+        $data->checkOut=$request->checkOut;
         $data->save();
-        return redirect('member/'.$id.'/edit')->with('msg', 'Member updated');
+
+        return redirect('attendance/'.$id.'/edit')->with('msg', 'Attendance updated');
     }
 
     /**
@@ -116,7 +115,7 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        Member::where('id', $id)->delete();
-        return redirect('member');
+        Attendance::where('id', $id)->delete();
+        return redirect('attendance');
     }
 }
