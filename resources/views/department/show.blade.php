@@ -12,11 +12,15 @@
 
         <table class='table table-bordered'>
             <tr>
-                <th>Title</th>
+                <!-- <th>Title</th>
                 <td>
                     {{$data->title}}
-                </td>
+                </td> -->
+                <!-- <th>Full Name</th>
+                <th>Address</th>
+                <th>Mobile</th> -->
             </tr>
+
             
         </table>
         

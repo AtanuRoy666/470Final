@@ -65,9 +65,9 @@
                 <tr>
                     <th>Status</th>
                     <td>
-                        <input type="radio" name="status" value='1' > Activate 
+                        <input type="radio" name="status" value='1' > Active 
                         <br>
-                        <input type="radio" name="status" value='0' > Deactivate 
+                        <input type="radio" name="status" value='0' > On Leave 
                     </td>
                 </tr>
                 <tr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Department;
+use App\Models\Employee;
 
 class DepartmentController extends Controller
 {
@@ -55,8 +56,8 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        $data=Department::find($id);
-        return view('department.show',['data'=>$data]);
+        // $data=Employee::find($id);
+        // return view('department.show',['data'=>$data]);
     }
 
     /**

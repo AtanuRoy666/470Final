@@ -30,7 +30,7 @@
                                                 <td>{{$d->id}}</td>
                                                 <td>{{$d->title}}</td>
                                                 <td>
-                                                    <a href="{{url('depart/'.$d->id)}}" class="btn btn-sm btn-warning">Show</a>
+                                                    <!-- <a href="{{url('depart/'.$d->id)}}" class="btn btn-sm btn-warning">Show</a> -->
                                                     <a href="{{url('depart/'.$d->id.'/edit')}}" class="btn btn-sm btn-info">Update</a>
                                                     <a onclick='return confirm("You are about to delete this data. Proceed?")' 
                                                     href="{{url('depart/'.$d->id.'/delete')}}" class="btn btn-sm btn-danger">Delete</a>
